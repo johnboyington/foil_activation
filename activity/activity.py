@@ -1,13 +1,14 @@
 import numpy as np
 
 from scipy.integrate import odeint, quad
+from scipy.interpolate import interp1d
 
 from cross_sections import foils
 from plotting import plot_activities
 from flux_spectrum import Flux
 
 
-def activity_calc(foil, m, P, t_s, t_i, t_f, plotname='decay.png'):
+def activity_calc(foil, m, P, t_s, t_i, t_c, t_f, plotname='decay.png'):
     '''
     Stuff.
     '''
@@ -69,6 +70,12 @@ def activity_calc(foil, m, P, t_s, t_i, t_f, plotname='decay.png'):
     N = odeint(decay, N_i, times, args=(decay_constants, t_s, t_i, R, P, num_reactions))
     activities = decay_constants * N
 
+    # counting
+    counts = list(np.zeros(num_reactions))  # fix this this is garbage wow
+    for i, reaction in enumerate(reaction_list):
+        act_fun = interp1d(times, activities[:, i+1], bounds_error=False, fill_value=0)
+        counts[i] = (reaction['erg'], quad(act_fun, t_c, t_f)[0])
+
     # Bq to uCi
     activities *= (1/3.7E10) * 1E6
     total_activity = np.sum(activities, axis=1)
@@ -76,7 +83,8 @@ def activity_calc(foil, m, P, t_s, t_i, t_f, plotname='decay.png'):
     # plotting
     if plotname:
         plot_activities(plotname, reaction_list, times, activities, total_activity, t_s, t_i, True)
-    return
+
+    return counts
 
 
 if __name__ == '__main__':
@@ -85,6 +93,7 @@ if __name__ == '__main__':
     m = 0.2  # mg
     t_s = 300  # s
     t_i = 600  # s
+    t_c = 3000  # s
     t_f = 3600  # s
     P = 100  # kW(th)
-    activity_calc(foil, m, P, t_s, t_i, t_f)
+    activity_calc(foil, m, P, t_s, t_i, t_c, t_f)

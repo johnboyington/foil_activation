@@ -18,16 +18,19 @@ Al['reactions']['n,p'] = {}
 Al['reactions']['n,p']['func'] = extract('13-Al-27(n,p)')
 Al['reactions']['n,p']['halflife'] = 9.458 * 60  # s
 Al['reactions']['n,p']['label'] = r'($n,p$)'
+Al['reactions']['n,p']['erg'] = [(.0086, 170.82), (.718, 843.76), (.282, 1014.52)]  # keV (placeholder)
 
 Al['reactions']['n,alpha'] = {}
 Al['reactions']['n,alpha']['func'] = extract('13-Al-27(n,&alpha;)')
 Al['reactions']['n,alpha']['halflife'] = 15.03 * 60 * 60  # s
 Al['reactions']['n,alpha']['label'] = r'($n,\alpha$)'
+Al['reactions']['n,alpha']['erg'] = [(0.00210, 996.6), (99.9936, 1368.626)]  # keV (placeholder) this line is totally wrong - like so wrong
 
 Al['reactions']['n,gamma'] = {}
 Al['reactions']['n,gamma']['func'] = extract('13-Al-27(n,&gamma;)')
 Al['reactions']['n,gamma']['halflife'] = 2.246 * 60  # s
 Al['reactions']['n,gamma']['label'] = r'($n,\gamma$)'
+Al['reactions']['n,gamma']['erg'] = [(1, 1778.987)]  # keV (placeholder)
 
 
 # rhodium

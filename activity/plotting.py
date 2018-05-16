@@ -1,8 +1,18 @@
+from matplotlib import rc, rcParams
 import matplotlib.pyplot as plt
 import numpy as np
 
 
 def plot_activities(name, reaction_list, t, activities, total_activity, t_s, t_i, bars=True):
+    rc('font', **{'family': 'serif'})
+    rcParams['xtick.direction'] = 'out'
+    rcParams['ytick.direction'] = 'out'
+    rcParams['xtick.labelsize'] = 18
+    rcParams['ytick.labelsize'] = 18
+    rcParams['lines.linewidth'] = 1.85
+    rcParams['axes.labelsize'] = 20
+    rcParams.update({'figure.autolayout': True})
+
     fig = plt.figure(0)
     ax = fig.add_subplot(111)
     ax.set_xlabel('Time (s)')
@@ -40,4 +50,5 @@ def plot_activities(name, reaction_list, t, activities, total_activity, t_s, t_i
 
     plt.legend()
     plt.savefig(name, dpi=300)
+    plt.close(fig)
     return
