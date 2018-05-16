@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 from scipy.integrate import odeint, quad
 
@@ -8,19 +7,7 @@ from plotting import plot_activities
 from flux_spectrum import Flux
 
 
-###############################################################################
-#                           USER DEFINED PARAMETERS
-###############################################################################
-m = 0.2  # mg
-t_s = 300  # s
-t_i = 600  # s
-t_f = 3600  # s
-P = 100  # kW(th)
-
-###############################################################################
-
-
-def activity_calc(foil, m, P, t_s, t_i, t_f):
+def activity_calc(foil, m, P, t_s, t_i, t_f, plotname='decay.png'):
     '''
     Stuff.
     '''
@@ -51,7 +38,7 @@ def activity_calc(foil, m, P, t_s, t_i, t_f):
     R = np.zeros(num_reactions + 1)
     R[0] = 1
     total_phi = 0
-    e = np.logspace(-5, 9)
+    e = np.logspace(-5, 9, 100)
     for i in range(len(e) - 1):
         total_phi += quad(phi.evaluate, e[i], e[i+1])[0]
         for j, reaction in enumerate(reaction_list):
@@ -63,7 +50,7 @@ def activity_calc(foil, m, P, t_s, t_i, t_f):
         '''
         Radioactive decay.
         '''
-        phi_i = (4E12 / 100) * P  # flux at a certain power
+        phi_i = (1/100) * 4E12 * (1 + 1/0.833) * P  # flux at a certain power
 
         # flux info
         if t < t_s:
@@ -87,21 +74,17 @@ def activity_calc(foil, m, P, t_s, t_i, t_f):
     total_activity = np.sum(activities, axis=1)
 
     # plotting
-    plot_activities(reaction_list, times, activities, total_activity, t_s, t_i, True)
+    if plotname:
+        plot_activities(plotname, reaction_list, times, activities, total_activity, t_s, t_i, True)
     return
 
 
 if __name__ == '__main__':
-    activity_calc(foils['Al'], m, P, t_s, t_i, t_f)
-
-
-
-
-
-
-
-
-
-
-
-
+    # user defined parameters
+    foil = foils['Al']
+    m = 0.2  # mg
+    t_s = 300  # s
+    t_i = 600  # s
+    t_f = 3600  # s
+    P = 100  # kW(th)
+    activity_calc(foil, m, P, t_s, t_i, t_f)

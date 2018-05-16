@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def plot_activities(reaction_list, t, activities, total_activity, t_s, t_i, bars=True):
+def plot_activities(name, reaction_list, t, activities, total_activity, t_s, t_i, bars=True):
     fig = plt.figure(0)
     ax = fig.add_subplot(111)
     ax.set_xlabel('Time (s)')
@@ -39,5 +39,5 @@ def plot_activities(reaction_list, t, activities, total_activity, t_s, t_i, bars
         ax.plot(h2_x, h2_y, 'k')
 
     plt.legend()
-    plt.savefig('decay.png', dpi=300)
+    plt.savefig(name, dpi=300)
     return
