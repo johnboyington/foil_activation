@@ -3,12 +3,12 @@ import numpy as np
 from scipy.integrate import odeint, quad
 from scipy.interpolate import interp1d
 
-from cross_sections import foils
+from cross_sections import foils, Cd
 from plotting import plot_activities
 from flux_spectrum import Flux
 
 
-def activity_calc(foil, m, P, t_s, t_i, t_c, t_f, plotname='decay.png'):
+def activity_calc(foil, m, P, t_s, t_i, t_ci, t_cf, t_f, cd_covered=False, cd_thickness=0.05, plotname='decay.png'):
     '''
     Stuff.
     '''
@@ -16,7 +16,7 @@ def activity_calc(foil, m, P, t_s, t_i, t_c, t_f, plotname='decay.png'):
     num_reactions = len(reaction_list)
 
     # facts of life
-    Na = 6.022E23  # atoms / mol
+    Na = 6.0221409E23  # atoms / mol
 
     # set up N_i
     N_i = np.zeros(num_reactions + 1)
@@ -33,8 +33,18 @@ def activity_calc(foil, m, P, t_s, t_i, t_c, t_f, plotname='decay.png'):
     # load in spectrum
     phi = Flux(1/0.833)
 
-    def reaction_rate(e, phi, sigma):
-        return (sigma(e) * 1E-24) * phi.evaluate(e)
+    def reaction_rate(e, phi, sigma, cd_fun):
+        return (sigma(e) * 1E-24) * phi.evaluate(e) * cd_fun(e)
+
+    if cd_covered:
+        def cd(e):
+            term = ((Cd['rho'] * Na) / Cd['M']) * cd_thickness * 1E-24
+            cd_xs = Cd['reactions']['n,tot']['func']
+            factor = np.exp(-term * cd_xs(e) * 5)
+            return factor
+    else:
+        def cd(e):
+            return 1
 
     R = np.zeros(num_reactions + 1)
     R[0] = 1
@@ -43,7 +53,7 @@ def activity_calc(foil, m, P, t_s, t_i, t_c, t_f, plotname='decay.png'):
     for i in range(len(e) - 1):
         total_phi += quad(phi.evaluate, e[i], e[i+1])[0]
         for j, reaction in enumerate(reaction_list):
-            R[j+1] += quad(reaction_rate, e[i], e[i+1], args=(phi, reaction['func']))[0]
+            R[j+1] += quad(reaction_rate, e[i], e[i+1], args=(phi, reaction['func'], cd))[0]
     R = R / total_phi
     R[0] = 0
 
@@ -74,17 +84,23 @@ def activity_calc(foil, m, P, t_s, t_i, t_c, t_f, plotname='decay.png'):
     counts = list(np.zeros(num_reactions))  # fix this this is garbage wow
     for i, reaction in enumerate(reaction_list):
         act_fun = interp1d(times, activities[:, i+1], bounds_error=False, fill_value=0)
-        counts[i] = (reaction['erg'], quad(act_fun, t_c, t_f)[0])
+        counts[i] = (reaction['erg'], quad(act_fun, t_ci, t_cf)[0])
 
     # Bq to uCi
     activities *= (1/3.7E10) * 1E6
     total_activity = np.sum(activities, axis=1)
 
+    # print some info
+    total_act_fun = interp1d(times, total_activity, bounds_error=False, fill_value=0)
+    scram_act = total_act_fun(t_i)
+    count_act = total_act_fun(t_ci)
+    print('Counting Activity:  {:4.2e} uCi'.format(float(count_act)))
+
     # plotting
     if plotname:
-        plot_activities(plotname, reaction_list, times, activities, total_activity, t_s, t_i, True)
+        plot_activities(plotname, reaction_list, times, activities, total_activity, t_s, t_i, t_ci, t_cf, False)
 
-    return counts
+    return counts, scram_act
 
 
 if __name__ == '__main__':
