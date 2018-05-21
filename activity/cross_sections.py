@@ -5,7 +5,8 @@ import numpy as np
 def extract(xs_string):
     xs_erg, xs_vals = np.loadtxt('xs/' + xs_string, delimiter=',', skiprows=1, unpack=True)
     f = interp1d(xs_erg, xs_vals, bounds_error=False, fill_value=0)
-    return f
+    region = xs_erg[0], xs_erg[-1]
+    return f, region
 
 
 # cadmium
@@ -14,8 +15,27 @@ Cd['M'] = 112.411  # g/mol
 Cd['rho'] = 8.69  # g/cm3
 Cd['reactions'] = {}
 
+cd_xs_data = [extract('48-Cd-106(n,total).txt'),
+              extract('48-Cd-108(n,total).txt'),
+              extract('48-Cd-110(n,total).txt'),
+              extract('48-Cd-111(n,total).txt'),
+              extract('48-Cd-112(n,total).txt'),
+              extract('48-Cd-113(n,total).txt'),
+              extract('48-Cd-114(n,total).txt'),
+              extract('48-Cd-116(n,total).txt')]
+
+cd_weights = [0.0125, 0.0089, 0.1249, 0.1280, 0.2413, 0.1222, 0.2873, 0.0749]
+
+
+def cd_xs_weighted(e):
+    xs = 0
+    for isotope in range(len(cd_weights)):
+        xs += cd_weights[isotope] * cd_xs_data[isotope](e)
+    return xs
+
+
 Cd['reactions']['n,tot'] = {}
-Cd['reactions']['n,tot']['func'] = extract('48-Cd-116(n,total).txt')
+Cd['reactions']['n,tot']['func'] = cd_xs_weighted
 Cd['reactions']['n,tot']['halflife'] = 0  # s
 Cd['reactions']['n,tot']['label'] = r'($n,tot$)'
 
@@ -27,21 +47,27 @@ Al['reactions'] = {}
 
 # Al27(n,p)Mg27
 Al['reactions']['n,p'] = {}
-Al['reactions']['n,p']['func'] = extract('13-Al-27(n,p)')
+f, r = extract('13-Al-27(n,p)')
+Al['reactions']['n,p']['func'] = f
+Al['reactions']['n,p']['region'] = r
 Al['reactions']['n,p']['halflife'] = 9.458 * 60  # s
 Al['reactions']['n,p']['label'] = r'($n,p$)'
 Al['reactions']['n,p']['erg'] = [(.007, 180), (.7, 840), (.3, 1013)]  # keV (placeholder)
 
 # Al27(n,a)Na24
 Al['reactions']['n,alpha'] = {}
-Al['reactions']['n,alpha']['func'] = extract('13-Al-27(n,&alpha;)')
+f, r = extract('13-Al-27(n,&alpha;)')
+Al['reactions']['n,alpha']['func'] = f
+Al['reactions']['n,alpha']['region'] = r
 Al['reactions']['n,alpha']['halflife'] = 15.03 * 60 * 60  # s
 Al['reactions']['n,alpha']['label'] = r'($n,\alpha$)'
 Al['reactions']['n,alpha']['erg'] = [(1, 1369), (1, 2754)]  # keV
 
 # Al27(n,g)Al28
 Al['reactions']['n,gamma'] = {}
-Al['reactions']['n,gamma']['func'] = extract('13-Al-27(n,&gamma;)')
+f, r = extract('13-Al-27(n,&gamma;)')
+Al['reactions']['n,gamma']['func'] = f
+Al['reactions']['n,gamma']['region'] = r
 Al['reactions']['n,gamma']['halflife'] = 2.246 * 60  # s
 Al['reactions']['n,gamma']['label'] = r'($n,\gamma$)'
 Al['reactions']['n,gamma']['erg'] = [(1, 1780)]  # keV (placeholder)
@@ -104,19 +130,25 @@ Au['rho'] = 19.32  # g/cm3
 Au['reactions'] = {}
 
 Au['reactions']['n,gamma'] = {}
-Au['reactions']['n,gamma']['func'] = extract('79-Au-197(n,&gamma;).txt')
+f, r = extract('79-Au-197(n,&gamma;).txt')
+Au['reactions']['n,gamma']['func'] = f
+Au['reactions']['n,gamma']['region'] = r
 Au['reactions']['n,gamma']['halflife'] = 2.7 * 60 * 60 * 24  # s
 Au['reactions']['n,gamma']['label'] = r'($n,\gamma$)'
 Au['reactions']['n,gamma']['erg'] = [(0.95, 412), (0.01, 676), (0.002, 1088)]  # intensity, keV
 
 Au['reactions']['n,2n'] = {}
-Au['reactions']['n,2n']['func'] = extract('79-Au-197(n,2n).txt')
+f, r = extract('79-Au-197(n,2n).txt')
+Au['reactions']['n,2n']['func'] = f
+Au['reactions']['n,2n']['region'] = r
 Au['reactions']['n,2n']['halflife'] = 6.18 * 60 * 60 * 24  # s
 Au['reactions']['n,2n']['label'] = r'($n,2n$)'
 Au['reactions']['n,2n']['erg'] = [(0.25, 333), (0.94, 356), (0.06, 426), (0.002, 1091)]  # intensity, keV
 
 Au['reactions']['n,inelastic'] = {}
-Au['reactions']['n,inelastic']['func'] = extract('79-Au-197(n,inelastic).txt')
+f, r = extract('79-Au-197(n,inelastic).txt')
+Au['reactions']['n,inelastic']['func'] = f
+Au['reactions']['n,inelastic']['region'] = r
 Au['reactions']['n,inelastic']['halflife'] = 7.8  # s
 Au['reactions']['n,inelastic']['label'] = r"($n,n'$)"
 Au['reactions']['n,inelastic']['erg'] = [(0.08, 130), (0.75, 279)]  # intensity, keV

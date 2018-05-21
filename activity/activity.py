@@ -1,18 +1,20 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 from scipy.integrate import odeint, quad
 from scipy.interpolate import interp1d
 
 from cross_sections import foils, Cd
-from plotting import plot_activities
+from plotting import plot_activities, plot_xs
 from flux_spectrum import Flux
 
 
-def activity_calc(foil, m, P, t_s, t_i, t_ci, t_cf, t_f, cd_covered=False, cd_thickness=0.05, plotname='decay.png'):
+def activity_calc(foil, m, P, t_i, t_ci, t_cf, t_f, cd_covered=False, cd_thickness=0.05, plotname='decay.png'):
     '''
     Stuff.
     '''
     reaction_list = list(foil['reactions'].values())
+    reaction_names = list(foil['reactions'].keys())
     num_reactions = len(reaction_list)
 
     # facts of life
@@ -57,16 +59,17 @@ def activity_calc(foil, m, P, t_s, t_i, t_ci, t_cf, t_f, cd_covered=False, cd_th
     R = R / total_phi
     R[0] = 0
 
-    def decay(N, t, lam, t_s, t_i, R, P, num_reactions):
+    # plot xs
+    plot_xs(reaction_names, reaction_list, phi.evaluate, cd)
+
+    def decay(N, t, lam, t_i, R, P, num_reactions):
         '''
         Radioactive decay.
         '''
         phi_i = (1/100) * 4E12 * (1 + 1/0.833) * P  # flux at a certain power
 
         # flux info
-        if t < t_s:
-            phi_0 = (phi_i * (t/t_s))
-        elif t_s < t and t < t_i:
+        if t < t_i:
             phi_0 = phi_i
         else:
             phi_0 = 0
@@ -77,7 +80,7 @@ def activity_calc(foil, m, P, t_s, t_i, t_ci, t_cf, t_f, cd_covered=False, cd_th
 
     # solve
     times = np.linspace(0, t_f, 10000)
-    N = odeint(decay, N_i, times, args=(decay_constants, t_s, t_i, R, P, num_reactions))
+    N = odeint(decay, N_i, times, args=(decay_constants, t_i, R, P, num_reactions))
     activities = decay_constants * N
 
     # counting
@@ -98,7 +101,7 @@ def activity_calc(foil, m, P, t_s, t_i, t_ci, t_cf, t_f, cd_covered=False, cd_th
 
     # plotting
     if plotname:
-        plot_activities(plotname, reaction_list, times, activities, total_activity, t_s, t_i, t_ci, t_cf, False)
+        plot_activities(plotname, reaction_list, times, activities, total_activity, t_i, t_ci, t_cf, False)
 
     return counts, scram_act
 
