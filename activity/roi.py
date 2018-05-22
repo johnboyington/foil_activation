@@ -48,20 +48,26 @@ cd = lambda e: 1
 
 
 
-def roi(sigma, phi):
+def roi(sigma, phi, cd):
     region = sigma['region']
     xs = sigma['func']
     
     # find where zero
     e = np.geomspace(region[0], region[1], 1000)
     xss = xs(e)
-    fw_xs = (xs(e) * phi(e)) / total_phi
+    fw_xs = (xs(e) * phi(e) * cd(e)) / total_phi
     
-    plt.plot(e, fw_xs)
+    plt.xlabel('Energy $MeV$')
+    plt.ylabel('Reaction Rate (Arbitrary Units)')
+    plt.plot(e, xss)
     plt.xscale('log')
     plt.yscale('log')
+    plt.xlim(*region)
+    
+    # calc 5 95
+    
 
 
 # do it
 xs = foils['Au']['reactions']['n,gamma']
-roi(xs, phi)
+roi(xs, phi, cd)
