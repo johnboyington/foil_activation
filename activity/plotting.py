@@ -80,8 +80,6 @@ def plot_xs(reaction_names, reaction_list, phi, cd):
     
         ax.plot(x, y, 'k', label='XS PLOT')
         ax.plot(x, y2, 'r', label='XS PLOT')
-        print(y)
-        print(y2)
     
         plt.legend()
         figname = 'plot/' + name + '.png'

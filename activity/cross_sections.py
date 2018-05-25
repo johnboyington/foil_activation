@@ -15,14 +15,14 @@ Cd['M'] = 112.411  # g/mol
 Cd['rho'] = 8.69  # g/cm3
 Cd['reactions'] = {}
 
-cd_xs_data = [extract('48-Cd-106(n,total).txt'),
-              extract('48-Cd-108(n,total).txt'),
-              extract('48-Cd-110(n,total).txt'),
-              extract('48-Cd-111(n,total).txt'),
-              extract('48-Cd-112(n,total).txt'),
-              extract('48-Cd-113(n,total).txt'),
-              extract('48-Cd-114(n,total).txt'),
-              extract('48-Cd-116(n,total).txt')]
+cd_xs_data = [extract('48-Cd-106(n,total).txt')[0],
+              extract('48-Cd-108(n,total).txt')[0],
+              extract('48-Cd-110(n,total).txt')[0],
+              extract('48-Cd-111(n,total).txt')[0],
+              extract('48-Cd-112(n,total).txt')[0],
+              extract('48-Cd-113(n,total).txt')[0],
+              extract('48-Cd-114(n,total).txt')[0],
+              extract('48-Cd-116(n,total).txt')[0]]
 
 cd_weights = [0.0125, 0.0089, 0.1249, 0.1280, 0.2413, 0.1222, 0.2873, 0.0749]
 
@@ -80,13 +80,15 @@ Rh['rho'] = 12.41  # g/cm3
 Rh['reactions'] = {}
 
 Rh['reactions']['n,gamma'] = {}
-Rh['reactions']['n,gamma']['func'] = extract('45-Rh-103(n,&gamma;).txt')
+f, r = extract('45-Rh-103(n,&gamma;).txt')
+Rh['reactions']['n,gamma']['func'] = f
 Rh['reactions']['n,gamma']['halflife'] = 4.4 * 60  # s
 Rh['reactions']['n,gamma']['label'] = r"($n,\gamma$)"
 Rh['reactions']['n,gamma']['erg'] = [(0.47, 51), (0.025, 78), (0.026, 560), (0.0018, 770)]  # intensity, keV
 
 Rh['reactions']['n,inelastic'] = {}
-Rh['reactions']['n,inelastic']['func'] = extract('45-Rh-103(n,inelastic).txt')
+f, r = extract('45-Rh-103(n,inelastic).txt')
+Rh['reactions']['n,inelastic']['func'] = f
 Rh['reactions']['n,inelastic']['halflife'] = 56.12 * 60  # s
 Rh['reactions']['n,inelastic']['label'] = r"($n,n'$)"
 Rh['reactions']['n,inelastic']['erg'] = [(0.004, 40)]  # intensity, keV
@@ -110,14 +112,16 @@ In['rho'] = 7.31  # g/cm3
 In['reactions'] = {}
 
 In['reactions']['n,gamma'] = {}
-In['reactions']['n,gamma']['func'] = extract('49-In-115(n,&gamma;).txt')
+f, r = extract('49-In-115(n,&gamma;).txt')
+In['reactions']['n,gamma']['func'] = f
 In['reactions']['n,gamma']['halflife'] = 54 * 60  # s
 In['reactions']['n,gamma']['label'] = r'($n,\gamma$)'
 In['reactions']['n,gamma']['erg'] = [(0.03, 138), (0.36, 417), (0.17, 819), (0.53, 1090),
                                      (0.8, 1293), (0.11, 1508), (0.2, 2111)]  # intensity, keV
 
 In['reactions']['n,inelastic'] = {}
-In['reactions']['n,inelastic']['func'] = extract('49-In-115(n,inelastic).txt')
+f, r = extract('49-In-115(n,inelastic).txt')
+In['reactions']['n,inelastic']['func'] = f
 In['reactions']['n,inelastic']['halflife'] = 4.36 * 60 * 60  # s
 In['reactions']['n,inelastic']['label'] = r"($n,n'$)"
 In['reactions']['n,inelastic']['erg'] = [(0.5, 335)]  # intensity, keV
