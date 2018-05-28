@@ -137,25 +137,31 @@ Au['reactions']['n,gamma'] = {}
 f, r = extract('79-Au-197(n,&gamma;).txt')
 Au['reactions']['n,gamma']['func'] = f
 Au['reactions']['n,gamma']['region'] = r
+Au['reactions']['n,gamma']['roi'] = 0.00672659373843, 5.26843714747
 Au['reactions']['n,gamma']['halflife'] = 2.7 * 60 * 60 * 24  # s
 Au['reactions']['n,gamma']['label'] = r'($n,\gamma$)'
 Au['reactions']['n,gamma']['erg'] = [(0.95, 412), (0.01, 676), (0.002, 1088)]  # intensity, keV
+Au['reactions']['n,gamma']['plotname'] = 'au_n,gamma'
 
 Au['reactions']['n,2n'] = {}
 f, r = extract('79-Au-197(n,2n).txt')
 Au['reactions']['n,2n']['func'] = f
 Au['reactions']['n,2n']['region'] = r
+Au['reactions']['n,2n']['roi'] = r
 Au['reactions']['n,2n']['halflife'] = 6.18 * 60 * 60 * 24  # s
 Au['reactions']['n,2n']['label'] = r'($n,2n$)'
 Au['reactions']['n,2n']['erg'] = [(0.25, 333), (0.94, 356), (0.06, 426), (0.002, 1091)]  # intensity, keV
+Au['reactions']['n,2n']['plotname'] = 'au_n,2n'
 
 Au['reactions']['n,inelastic'] = {}
 f, r = extract('79-Au-197(n,inelastic).txt')
 Au['reactions']['n,inelastic']['func'] = f
 Au['reactions']['n,inelastic']['region'] = r
+Au['reactions']['n,inelastic']['roi'] = r
 Au['reactions']['n,inelastic']['halflife'] = 7.8  # s
 Au['reactions']['n,inelastic']['label'] = r"($n,n'$)"
 Au['reactions']['n,inelastic']['erg'] = [(0.08, 130), (0.75, 279)]  # intensity, keV
+Au['reactions']['n,inelastic']['plotname'] = 'au_n,inelastic'
 
 # all foils
 foils = {}
