@@ -159,13 +159,23 @@ if test:
 
 # run full simulation using each foil
 # gold
-for xs in foils['Au']['reactions'].values():
-    print('\n' + xs['plotname'])
-    left, right = roi(xs, phi, no_cd, False, True)
-    print('Left: {:6.4e}'.format(left))
-    print('Right: {:6.4e}'.format(right))
+if False:
+    for xs in foils['Au']['reactions'].values():
+        print('\n' + xs['plotname'])
+        left, right = roi(xs, phi, no_cd, False, True)
+        print('Left: {:6.4e}'.format(left))
+        print('Right: {:6.4e}'.format(right))
 
-#    print('\n' + xs['plotname'] + '  (Cd)')
-#    left, right = roi(xs, phi, ya_cd, True, True)
-#    print('Left: {:6.4e}'.format(left))
-#    print('Right: {:6.4e}'.format(right))
+        print('\n' + xs['plotname'] + '  (Cd)')
+        left, right = roi(xs, phi, ya_cd, True, True)
+        print('Left: {:6.4e}'.format(left))
+        print('Right: {:6.4e}'.format(right))
+
+
+# indium
+if True:
+    for xs in foils['In']['reactions'].values():
+        print('\n' + xs['plotname'])
+        left, right = roi(xs, phi, no_cd, False, True)
+        print('Left: {:6.4e}'.format(left))
+        print('Right: {:6.4e}'.format(right))
