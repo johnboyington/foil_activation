@@ -5,7 +5,7 @@ from matplotlib import rc, rcParams
 from scipy.integrate import quad
 from scipy.optimize import fsolve
 
-from cross_sections import foils
+from cross_sections import foils, Cd
 from flux_spectrum import Flux
 
 ###############################################################################
@@ -53,19 +53,36 @@ plt.close(fig)
 #                               cadmium
 ###############################################################################
 
+
 # cadmium factor
-cd = lambda e: 1
+def no_cd(e):
+    return 1
+
+
+def ya_cd(e):
+    # facts of life
+    Na = 6.0221409E23  # atoms / mol
+    cd_thickness = 0.05
+
+    term = ((Cd['rho'] * Na) / Cd['M']) * cd_thickness * 1E-24
+    cd_xs = Cd['reactions']['n,tot']['func']
+    factor = np.exp(-term * cd_xs(e) * 5)
+    return factor
 
 ###############################################################################
 #                               roi
 ###############################################################################
 
 
-def roi(sigma, phi, cd, recalculate=False):
+def roi(sigma, phi, cd, cd_cov=False, recalculate=False):
     region = sigma['region']
     roi = sigma['roi']
     xs = sigma['func']
     plotname = sigma['plotname']
+
+    if cd_cov:
+        roi = sigma['roi_cd']
+        plotname += '_cd'
 
     # find where zero
     # e = np.geomspace(region[0], region[1], 1000)
@@ -122,20 +139,33 @@ def roi(sigma, phi, cd, recalculate=False):
     ax.set_xscale('log')
     ax.set_yscale('log')
     ax.set_xlim(*region)
+    y_upper_lim = np.max(xss) * 2
+    if np.log(np.max(xss)) - np.log(np.min(xss)) > 28:
+        ax.set_ylim(y_upper_lim * 1e-12, y_upper_lim)
+    else:
+        ax.set_ylim(np.min(xss), y_upper_lim)
     plt.savefig('plot/{}.png'.format(plotname), dpi=300)
+    plt.close(fig)
 
     return left, right
 
 
-# do it
-xs = foils['Au']['reactions']['n,gamma']
-left, right = roi(xs, phi, cd, False)
-'''
-for foil in foils.values():
-    for xs in foil['reactions'].values():
-        print(xs['\n plotname'])
-        #left, right = roi(xs, phi, cd, False)
-        left, right = xs['roi'][0], xs['roi'][1]
-        print('Left: {:6.4e}'.format(left))
-        print('Right: {:6.4e}'.format(right))
-'''
+# test individual case
+test = False
+if test:
+    xs = foils['Au']['reactions']['n,gamma']
+    left, right = roi(xs, phi, ya_cd, False, False)
+
+
+# run full simulation using each foil
+# gold
+for xs in foils['Au']['reactions'].values():
+    print('\n' + xs['plotname'])
+    left, right = roi(xs, phi, no_cd, False, True)
+    print('Left: {:6.4e}'.format(left))
+    print('Right: {:6.4e}'.format(right))
+
+#    print('\n' + xs['plotname'] + '  (Cd)')
+#    left, right = roi(xs, phi, ya_cd, True, True)
+#    print('Left: {:6.4e}'.format(left))
+#    print('Right: {:6.4e}'.format(right))
