@@ -173,8 +173,24 @@ if False:
 
 
 # indium
-if True:
+if False:
     for xs in foils['In']['reactions'].values():
+        print('\n' + xs['plotname'])
+        left, right = roi(xs, phi, no_cd, False, True)
+        print('Left: {:6.4e}'.format(left))
+        print('Right: {:6.4e}'.format(right))
+
+# rhodium
+if False:
+    for xs in foils['Rh']['reactions'].values():
+        print('\n' + xs['plotname'])
+        left, right = roi(xs, phi, no_cd, False, True)
+        print('Left: {:6.4e}'.format(left))
+        print('Right: {:6.4e}'.format(right))
+
+# aluminum
+if True:
+    for xs in foils['Al']['reactions'].values():
         print('\n' + xs['plotname'])
         left, right = roi(xs, phi, no_cd, False, True)
         print('Left: {:6.4e}'.format(left))
