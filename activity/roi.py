@@ -162,21 +162,15 @@ if test:
 if False:
     for xs in foils['Au']['reactions'].values():
         print('\n' + xs['plotname'])
-        left, right = roi(xs, phi, no_cd, False, True)
+        left, right = roi(xs, phi, no_cd, False, False)
         print('Left: {:6.4e}'.format(left))
         print('Right: {:6.4e}'.format(right))
-
-        print('\n' + xs['plotname'] + '  (Cd)')
-        left, right = roi(xs, phi, ya_cd, True, True)
-        print('Left: {:6.4e}'.format(left))
-        print('Right: {:6.4e}'.format(right))
-
 
 # indium
 if False:
     for xs in foils['In']['reactions'].values():
         print('\n' + xs['plotname'])
-        left, right = roi(xs, phi, no_cd, False, True)
+        left, right = roi(xs, phi, no_cd, False, False)
         print('Left: {:6.4e}'.format(left))
         print('Right: {:6.4e}'.format(right))
 
@@ -184,14 +178,30 @@ if False:
 if False:
     for xs in foils['Rh']['reactions'].values():
         print('\n' + xs['plotname'])
-        left, right = roi(xs, phi, no_cd, False, True)
+        left, right = roi(xs, phi, no_cd, False, False)
         print('Left: {:6.4e}'.format(left))
         print('Right: {:6.4e}'.format(right))
 
 # aluminum
-if True:
+if False:
     for xs in foils['Al']['reactions'].values():
         print('\n' + xs['plotname'])
-        left, right = roi(xs, phi, no_cd, False, True)
+        left, right = roi(xs, phi, no_cd, False, False)
+        print('Left: {:6.4e}'.format(left))
+        print('Right: {:6.4e}'.format(right))
+
+# gold (Cd)
+if False:
+    for xs in foils['Au']['reactions'].values():
+        print('\n' + xs['plotname'] + '  (Cd)')
+        left, right = roi(xs, phi, ya_cd, True, False)
+        print('Left: {:6.4e}'.format(left))
+        print('Right: {:6.4e}'.format(right))
+
+# indium (Cd)
+if True:
+    for xs in foils['In']['reactions'].values():
+        print('\n' + xs['plotname'] + '  (Cd)')
+        left, right = roi(xs, phi, ya_cd, True, True)
         print('Left: {:6.4e}'.format(left))
         print('Right: {:6.4e}'.format(right))
