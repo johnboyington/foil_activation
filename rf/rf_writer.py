@@ -66,4 +66,4 @@ def write_mcnp(reaction, cadmium):
         F.write(inp)
 
 if __name__ == '__main__':
-    write_mcnp('in', False)
+    write_mcnp('in', True)
