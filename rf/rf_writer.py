@@ -37,6 +37,8 @@ def write_mcnp(reaction, cadmium):
 
     assert reaction in ['in', 'au', 'rh', 'al'], 'Not a valid foil!'
 
+    name = reaction
+
     # foil
     foil_cards = {}
     foil_cards['in'] = (' 1  -7.31    ', '-1 1 (102) (4)')
@@ -50,6 +52,7 @@ def write_mcnp(reaction, cadmium):
     # cadmium
     if cadmium:
         cd_s = '14  -8.650   '
+        name += '_cd'
     else:
         cd_s = '13  -0.001662'
 
@@ -62,8 +65,14 @@ def write_mcnp(reaction, cadmium):
 
     inp = rf_template.format(foil_s, cd_s, source_s, reaction_s)
 
-    with open('input.inp', 'w+') as F:
+    with open('mcnp/' + name + '.inp', 'w+') as F:
         F.write(inp)
 
-if __name__ == '__main__':
-    write_mcnp('in', True)
+
+# write all
+write_mcnp('in', False)
+write_mcnp('in', True)
+write_mcnp('au', False)
+write_mcnp('au', True)
+write_mcnp('rh', False)
+write_mcnp('al', False)

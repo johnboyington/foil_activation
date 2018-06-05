@@ -23,5 +23,10 @@ def read_mcnp(readfile, writefiles, num_reactions):
         np.savetxt('data/' + name + '_err.txt', e)
     return response
 
-if __name__ == '__main__':
-    read_mcnp('mcnp/in.io', ['in_n,gamma', 'in_n,inelastic'], 2)
+# read all
+read_mcnp('mcnp/in.inpo', ['in_n,gamma', 'in_n,inelastic'], 2)
+read_mcnp('mcnp/in_cd.inpo', ['in_cd_n,gamma', 'in_cd_n,inelastic'], 2)
+read_mcnp('mcnp/au.inpo', ['au_n,gamma', 'au_n,inelastic', 'au_n,2n'], 3)
+read_mcnp('mcnp/au_cd.inpo', ['au_cd_n,gamma', 'au_cd_n,inelastic', 'au_cd_n,2n'], 3)
+read_mcnp('mcnp/rh.inpo', ['rh_n,gamma', 'rh_n,inelastic'], 2)
+read_mcnp('mcnp/al.inpo', ['al_n,gamma', 'al_n,p', 'al_n,alpha'], 3)

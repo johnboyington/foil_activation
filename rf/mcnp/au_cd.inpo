@@ -1,0 +1,1225 @@
+          Code Name & Version = MCNP6, 1.0
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/       
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/    
+  _/      _/      _/             _/    _/_/       _/           _/    _/   
+ _/      _/        _/_/_/       _/      _/       _/             _/_/      
+  
+  +---------------------------------------------------------------------+
+  | Copyright 2008. Los Alamos National Security, LLC.  All rights      |
+  | reserved.                                                           |
+  |   This material was produced under U.S. Government contract         |
+  | DE-AC52-06NA25396 for Los Alamos National Laboratory, which is      |
+  | operated by Los Alamos National Security, LLC, for the U.S.         |
+  | Department of Energy. The Government is granted for itself and      |
+  | others acting on its behalf a paid-up, nonexclusive, irrevocable    |
+  | worldwide license in this material to reproduce, prepare derivative |
+  | works, and perform publicly and display publicly. Beginning five    |
+  | (5) years after 2008, subject to additional five-year worldwide     |
+  | renewals, the Government is granted for itself and others acting on |
+  | its behalf a paid-up, nonexclusive, irrevocable worldwide license   |
+  | in this material to reproduce, prepare derivative works, distribute |
+  | copies to the public, perform publicly and display publicly, and to |
+  | permit others to do so. NEITHER THE UNITED STATES NOR THE UNITED    |
+  | STATES DEPARTMENT OF ENERGY, NOR LOS ALAMOS NATIONAL SECURITY, LLC, |
+  | NOR ANY OF THEIR EMPLOYEES, MAKES ANY WARRANTY, EXPRESS OR IMPLIED, |
+  | OR ASSUMES ANY LEGAL LIABILITY OR RESPONSIBILITY FOR THE ACCURACY,  |
+  | COMPLETENESS, OR USEFULNESS OF ANY INFORMATION, APPARATUS, PRODUCT, |
+  | OR PROCESS DISCLOSED, OR REPRESENTS THAT ITS USE WOULD NOT INFRINGE |
+  | PRIVATELY OWNED RIGHTS.                                             |
+  +---------------------------------------------------------------------+
+  
+1mcnp     version 6     ld=05/08/13                     06/05/18 12:01:42 
+ *************************************************************************                 probid =  06/05/18 12:01:42 
+ name=au_cd.inp tasks 26                                                         
+
+ 
+  warning.  Physics models disabled.
+         1-       c TRIGA In-Core Foil Response Function Generator                                
+         2-       c ***************************************************************************** 
+         3-       c ------------------------------ CELL CARD ------------------------------------ 
+         4-       c ***************************************************************************** 
+         5-       10    2  -19.32      -10              imp:n=1  $ Foil                           
+         6-       11   14  -8.650       10 -11          imp:n=1  $ Cd Covering                    
+         7-       c                                                                               
+         8-       21   13  -0.001662    11 -21 -99      imp:n=1  $ Argon                          
+         9-       22   12  -2.650       21 -22 -99      imp:n=1  $ Silica                         
+        10-       23   13  -0.001662    22 -23 -99      imp:n=1  $ Argon                          
+        11-       24   11  -4.506       23 -24 -99      imp:n=1  $ Titanium                       
+        12-       25   10  -1.000       24     -99      imp:n=1  $ Water                          
+        13-       c                                                                               
+        14-       99    0            99              imp:n=0  $ Graveyard                         
+        15-       c ----------------------------------------------------------------------------- 
+        16-       c ***************************************************************************** 
+        17-                                                                                       
+        18-       c ***************************************************************************** 
+        19-       c ----------------------------- SURFACE CARD ---------------------------------- 
+        20-       c ***************************************************************************** 
+        21-       c ----------------------------------------------------------------------------- 
+        22-       10  rpp  -0.05    0.05    -0.05    0.05   -0.005   0.005         $  Foil        
+        23-       11  rcc   0.00    0.00    -0.05    0.00    0.00    0.1   0.0875  $ Cd Covering  
+        24-       c                                                                               
+        25-       21 cz 0.100000                                                                  
+        26-       22 cz 0.235000                                                                  
+        27-       23 cz 0.238125                                                                  
+        28-       24 cz 0.396875                                                                  
+        29-       c                                                                               
+        30-       99  rcc   0.00    0.00    -5      0.00    0.00    10   5    $ Problem Space     
+        31-       c ----------------------------------------------------------------------------- 
+        32-       c ***************************************************************************** 
+        33-                                                                                       
+        34-       c ***************************************************************************** 
+        35-       c ------------------------------- DATA CARD ----------------------------------- 
+        36-       c ***************************************************************************** 
+        37-       c ----------------------------------------------------------------------------- 
+        38-       c --------------------------- Source Definition ------------------------------- 
+        39-       c ----------------------------------------------------------------------------- 
+        40-       SDEF POS=0 0 0 EXT=d2 AXS=0 0 1 PAR=1 ERG=d3 RAD=d1       $ Source Term         
+        41-       SI1 0 2                                                   $ Radius of Source    
+        42-       SP1 -21 1                                                 $ Uniform Sampling    
+        43-       SI2 -1 1                                                  $ Zmin to Zmax        
+        44-       SP2 -21 0                                                 $ Uniform Sampling    
+        45-       c                               Energy Bins                                     
+        46-       SI3  H           1.000000e-11    4.000000e-09    1.000000e-08    2.530000e-08   
+        47-                        4.000000e-08    5.000000e-08    6.000000e-08    8.000000e-08   
+        48-                        1.000000e-07    1.500000e-07    2.000000e-07    2.500000e-07   
+        49-                        3.250000e-07    3.500000e-07    3.750000e-07    4.500000e-07   
+        50-                        6.250000e-07    1.010000e-06    1.080000e-06    1.130000e-06   
+        51-                        5.000000e-06    6.250000e-06    6.500000e-06    6.880000e-06   
+        52-                        7.000000e-06    2.050000e-05    2.120000e-05    2.180000e-05   
+        53-                        3.600000e-05    3.710000e-05    6.500000e-05    6.750000e-05   
+        54-                        1.010000e-04    1.050000e-04    1.160000e-04    1.180000e-04   
+        55-                        1.880000e-04    1.920000e-04    2.250000e-03    3.740000e-03   
+        56-                        1.700000e-02    2.000000e-02    5.000000e-02    2.000000e-01   
+        57-                        2.700000e-01    3.300000e-01    4.700000e-01    6.000000e-01   
+        58-                        7.500000e-01    8.610000e-01    1.200000e+00    1.500000e+00   
+        59-                        1.850000e+00    3.000000e+00    4.300000e+00    6.430000e+00   
+        60-                        2.000000e+01                                                   
+        61-       SP3              0.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        62-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        63-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        64-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        65-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        66-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        67-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        68-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        69-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        70-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        71-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        72-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        73-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        74-                        1.000000e+00    1.000000e+00    1.000000e+00    1.000000e+00   
+        75-                        1.000000e+00                                                   
+        76-       c                                                                               
+        77-       c                                                                               
+        78-       c                                                                               
+        79-       c                                                                               
+        80-       nps 4e7                                             $ Number of Particles       
+        81-       c                                                                               
+        82-       c ----------------------------------------------------------------------------- 
+        83-       c ---------------------------- Tally Detectors -------------------------------- 
+        84-       c ----------------------------------------------------------------------------- 
+        85-       Mode N                                      $ Mode Neutron                      
+        86-       c                                                                               
+        87-       F4:N  10                                                                        
+        88-       FM4   -1 2 (102) (4) (16)                          $ Tally Multiplier           
+        89-       FT4 SCX 3                                                                       
+        90-       c ----------------------------------------------------------------------------- 
+        91-       c ------------------------------- Materials ----------------------------------- 
+        92-       c ----------------------------------------------------------------------------- 
+        93-       c indium 7.31 g/cm3                                                             
+        94-       m1         49113.80c  0.0428                                                    
+  warning.  material        1 is not used in the problem.
+        95-                  49115.80c  0.9572                                                    
+        96-       c gold 19.32 g/cm3                                                              
+        97-       m2         79197.80c  1.0                                                       
+        98-       c rhodium 12.41 g/cm3                                                           
+        99-       m3         45103.80c  1.0                                                       
+  warning.  material        3 is not used in the problem.
+       100-       c aluminum 2.7 g/cm3                                                            
+       101-       m4         13027.80c  1.0                                                       
+  warning.  material        4 is not used in the problem.
+       102-       c water                                                                         
+       103-       m10         1001.80c -0.11209788                                                
+       104-                  1002.80c -2.5765672e-05                                              
+       105-                  8016.80c -0.88751705                                                 
+       106-                  8017.80c -0.00035930374                                              
+       107-       c titanium (4.506 g/cm3)                                                        
+       108-       m11       22046.80c  0.0825                                                     
+       109-                 22047.80c  0.0744                                                     
+       110-                 22048.80c  0.7372                                                     
+       111-                 22049.80c  0.0541                                                     
+       112-                 22050.80c  0.0518                                                     
+       113-       c silica                                                                        
+       114-       m12        8016.80c -0.53345939                                                 
+       115-                 14028.80c -0.46654061                                                 
+       116-       c argon                                                                         
+       117-       m13       18036.80c -0.0030036131                                               
+       118-                 18038.80c -0.00059774404                                              
+       119-                 18040.80c -0.99639864                                                 
+       120-       c cadmium                                                                       
+       121-       m14       48106.80c  0.0125                                                     
+       122-                 48108.80c  0.0089                                                     
+       123-                 48110.80c  0.1247                                                     
+       124-                 48111.80c  0.1280                                                     
+       125-                 48112.80c  0.2411                                                     
+       126-                 48113.80c  0.1223                                                     
+       127-                 48114.80c  0.2875                                                     
+       128-                 48116.80c  0.0751                                                     
+       129-       c ----------------------------------------------------------------------------- 
+       130-       c ***************************************************************************** 
+ 
+  comment.  total nubar used if fissionable isotopes are present.
+ 
+  warning.    1 materials had unnormalized fractions. print table 40.
+1cells                                                                                                  print table 60
+
+                               atom        gram                                            neutron                                     
+              cell      mat   density     density     volume       mass            pieces importance                                   
+
+        1       10        2  5.90688E-02 1.93200E+01 1.00000E-04 1.93200E-03           0  1.0000E+00                                   
+        2       11       14  4.63386E-02 8.65000E+00 0.00000E+00 0.00000E+00           0  1.0000E+00                                   
+        3       21       13  2.50543E-05 1.66200E-03 3.11754E-01 5.18135E-04           1  1.0000E+00                                   
+        4       22       12  7.98363E-02 2.65000E+00 1.42079E+00 3.76508E+00           1  1.0000E+00                                   
+        5       23       13  2.50543E-05 1.66200E-03 4.64489E-02 7.71981E-05           1  1.0000E+00                                   
+        6       24       11  5.66893E-02 4.50600E+00 3.16692E+00 1.42701E+01           1  1.0000E+00                                   
+        7       25       10  1.00417E-01 1.00000E+00 7.80450E+02 7.80450E+02           1  1.0000E+00                                   
+        8       99        0  0.00000E+00 0.00000E+00 0.00000E+00 0.00000E+00           0  0.0000E+00                                   
+
+ total                                               7.85396E+02 7.98488E+02
+
+    minimum source weight = 1.0000E+00    maximum source weight = 1.0000E+00
+
+ ***************************************************
+ * Random Number Generator  =                    1 *
+ * Random Number Seed       =       19073486328125 *
+ * Random Number Multiplier =       19073486328125 *
+ * Random Number Adder      =                    0 *
+ * Random Number Bits Used  =                   48 *
+ * Random Number Stride     =               152917 *
+ ***************************************************
+
+ 
+  comment.  threading will be used when possible in portions of mcnp6.
+ 
+  comment.  threading will be used for n/p/e table physics.
+ 
+  comment.  threading will generally not be used for model physics.
+
+         5 warning messages so far.
+1cross-section tables                                                                                   print table 100
+     XSDIR used: /home/john/opt/mcnp/MCNP_DATA/xsdir_mcnp6.1
+
+     table    length
+
+                        tables from file xdata/endf71x/H/1001.710nc                                      
+
+ particle-production data for deuterons being expunged from   1001.80c
+   1001.80c    3652  H1 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)          mat 125      12/17/12
+
+                        tables from file xdata/endf71x/H/1002.710nc                                      
+
+ particle-production data for protons   being expunged from   1002.80c
+ particle-production data for tritons   being expunged from   1002.80c
+   1002.80c    5924  H2 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)          mat 128      12/17/12
+
+                        tables from file xdata/endf71x/O/8016.710nc                                      
+
+ particle-production data for protons   being expunged from   8016.80c
+ particle-production data for deuterons being expunged from   8016.80c
+ particle-production data for tritons   being expunged from   8016.80c
+ particle-production data for alphas    being expunged from   8016.80c
+   8016.80c  171194  O16 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)         mat 825      12/13/12
+
+                        tables from file xdata/endf71x/O/8017.710nc                                      
+
+   8017.80c    4921  O17 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)         mat 828      12/13/12
+
+                        tables from file xdata/endf71x/Si/14028.710nc                                    
+
+ particle-production data for protons   being expunged from  14028.80c
+ particle-production data for deuterons being expunged from  14028.80c
+ particle-production data for tritons   being expunged from  14028.80c
+ particle-production data for alphas    being expunged from  14028.80c
+  14028.80c  105939  Si28 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)        mat1425      12/14/12
+
+                        tables from file xdata/endf71x/Ar/18036.710nc                                    
+
+  18036.80c   11998  Ar36 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)        mat1825      12/16/12
+
+                        tables from file xdata/endf71x/Ar/18038.710nc                                    
+
+  18038.80c   13256  Ar38 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)        mat1831      12/16/12
+                     probability tables used from 3.0000E-01 to 1.0000E+00 mev.
+
+                        tables from file xdata/endf71x/Ar/18040.710nc                                    
+
+  18040.80c  134198  Ar40 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)        mat1837      12/15/12
+
+                        tables from file xdata/endf71x/Ti/22046.710nc                                    
+
+ particle-production data for protons   being expunged from  22046.80c
+ particle-production data for alphas    being expunged from  22046.80c
+  22046.80c  145305  Ti46 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)        mat2225      12/13/12
+
+                        tables from file xdata/endf71x/Ti/22047.710nc                                    
+
+ particle-production data for protons   being expunged from  22047.80c
+ particle-production data for alphas    being expunged from  22047.80c
+  22047.80c  119224  Ti47 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)        mat2228      12/13/12
+
+                        tables from file xdata/endf71x/Ti/22048.710nc                                    
+
+ particle-production data for protons   being expunged from  22048.80c
+ particle-production data for alphas    being expunged from  22048.80c
+  22048.80c  136941  Ti48 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)        mat2231      12/13/12
+
+                        tables from file xdata/endf71x/Ti/22049.710nc                                    
+
+ particle-production data for protons   being expunged from  22049.80c
+ particle-production data for alphas    being expunged from  22049.80c
+  22049.80c  113471  Ti49 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)        mat2234      12/13/12
+
+                        tables from file xdata/endf71x/Ti/22050.710nc                                    
+
+ particle-production data for protons   being expunged from  22050.80c
+ particle-production data for alphas    being expunged from  22050.80c
+  22050.80c   84997  Ti50 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)        mat2237      12/15/12
+
+                        tables from file xdata/endf71x/Cd/48106.710nc                                    
+
+  48106.80c   83616  Cd106 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)       mat4825      12/15/12
+
+                        tables from file xdata/endf71x/Cd/48108.710nc                                    
+
+  48108.80c   65207  Cd108 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)       mat4831      12/15/12
+                     probability tables used from 6.0000E-03 to 1.0000E-01 mev.
+
+                        tables from file xdata/endf71x/Cd/48110.710nc                                    
+
+  48110.80c   89529  Cd110 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)       mat4837      12/13/12
+                     probability tables used from 7.0000E-03 to 1.0000E-01 mev.
+
+                        tables from file xdata/endf71x/Cd/48111.710nc                                    
+
+  48111.80c  163107  Cd111 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)       mat4840      12/13/12
+                     probability tables used from 2.3000E-03 to 1.0000E-01 mev.
+
+                        tables from file xdata/endf71x/Cd/48112.710nc                                    
+
+  48112.80c  113359  Cd112 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)       mat4843      12/13/12
+                     probability tables used from 1.1500E-02 to 1.0000E-01 mev.
+
+                        tables from file xdata/endf71x/Cd/48113.710nc                                    
+
+  48113.80c  296003  Cd113 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)       mat4846      12/13/12
+                     probability tables used from 5.0000E-03 to 1.0000E-01 mev.
+
+                        tables from file xdata/endf71x/Cd/48114.710nc                                    
+
+  48114.80c   86548  Cd114 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)       mat4849      12/13/12
+                     probability tables used from 8.0000E-03 to 1.0000E-01 mev.
+
+                        tables from file xdata/endf71x/Cd/48116.710nc                                    
+
+  48116.80c   58281  Cd116 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)       mat4855      12/13/12
+                     probability tables used from 9.5000E-03 to 1.0000E-01 mev.
+
+                        tables from file xdata/endf71x/Au/79197.710nc                                    
+
+ 
+  warning.  fm/pert card rxn   4 is missing from  79197.80c
+  79197.80c  260166  Au197 ENDF71x (jlconlin)  Ref. see jlconlin (ref 09/10/2012  10:00:53)       mat7925      12/19/12
+
+  total     2266836
+
+1particles and energy limits                                                                            print table 101
+
+                         particle      maximum       smallest      largest       always        always
+                         cutoff        particle      table         table         use table     use model
+   particle type         energy        energy        maximum       maximum       below         above
+
+    1  n    neutron     0.0000E+00    1.0000E+36    2.0000E+01    1.5000E+02    1.0000E+36    1.0000E+36
+ 
+
+ ***********************************************************************************************************************
+
+ dump no.    1 on file au_cd.inpr     nps =           0     coll =              0     ctm =        0.00   nrn =         
+        0
+
+         6 warning messages so far.
+
+ ***********************************************************************************************************************
+
+ dump no.    2 on file au_cd.inpr     nps =     9935018     coll =      294334470     ctm =     1560.48   nrn =       
+ 5087819449
+
+ ***********************************************************************************************************************
+
+ dump no.    3 on file au_cd.inpr     nps =    20023268     coll =      593386302     ctm =     3120.84   nrn =      
+ 10257389740
+
+ ***********************************************************************************************************************
+
+ dump no.    4 on file au_cd.inpr     nps =    30150847     coll =      893708703     ctm =     4681.28   nrn =      
+ 15448667905
+1problem summary                                                                                                           
+
+      run terminated when    40000000  particle histories were done.
++                                                                                                    06/05/18 12:10:53 
+      c TRIGA In-Core Foil Response Function Generator                                     probid =  06/05/18 12:01:42 
+
+ neutron creation    tracks      weight        energy            neutron loss        tracks      weight        energy
+                                 (per source particle)                                           (per source particle)
+
+ source            40000000    1.0000E+00    5.6906E-01          escape            38947446    7.8971E-01    3.5732E-01
+ nucl. interaction        0    0.            0.                  energy cutoff            0    0.            0.        
+ particle decay           0    0.            0.                  time cutoff              0    0.            0.        
+ weight window            0    0.            0.                  weight window            0    0.            0.        
+ cell importance          0    0.            0.                  cell importance          0    0.            0.        
+ weight cutoff            0    4.7234E-03    1.9923E-10          weight cutoff      1053437    4.7313E-03    2.1092E-10
+ e or t importance        0    0.            0.                  e or t importance        0    0.            0.        
+ dxtran                   0    0.            0.                  dxtran                   0    0.            0.        
+ forced collisions        0    0.            0.                  forced collisions        0    0.            0.        
+ exp. transform           0    0.            0.                  exp. transform           0    0.            0.        
+ upscattering             0    0.            2.2562E-07          downscattering           0    0.            2.0403E-01
+ photonuclear             0    0.            0.                  capture                  0    2.1030E-01    7.4416E-03
+ (n,xn)                1766    4.2125E-05    7.9203E-05          loss to (n,xn)         883    2.1062E-05    3.5168E-04
+ prompt fission           0    0.            0.                  loss to fission          0    0.            0.        
+ delayed fission          0    0.            0.                  nucl. interaction        0    0.            0.        
+ prompt photofis          0    0.            0.                  particle decay           0    0.            0.        
+ tabular boundary         0    0.            0.                  tabular boundary         0    0.            0.        
+ tabular sampling         0    0.            0.                  elastic scatter          0    0.            0.        
+     total         40001766    1.0048E+00    5.6914E-01              total         40001766    1.0048E+00    5.6914E-01
+
+   number of neutrons banked                     883        average time of (shakes)              cutoffs
+   neutron tracks per source particle     1.0000E+00          escape            3.5830E+03          tco   1.0000E+33
+   neutron collisions per source particle 2.9638E+01          capture           4.4012E+03          eco   0.0000E+00
+   total neutron collisions               1185534429          capture or escape 3.7551E+03          wc1  -5.0000E-01
+   net multiplication              1.0000E+00 0.0000          any termination   3.7881E+03          wc2  -2.5000E-01
+
+ computer time so far in this run  6192.81 minutes            maximum number ever in bank         1
+ computer time in mcrun            6191.65 minutes            bank overflows to backup file       0
+ source particles per minute            6.4603E+03
+ random numbers generated              20493057883            most random numbers used was        8105 in history    27208352
+
+ range of sampled source weights = 1.0000E+00 to 1.0000E+00
+
+ number of histories processed by each thread
+     1537481     1538839     1535534     1536759     1536318     1540598     1538007     1544028     1537172     1536134
+     1539361     1538534     1539865     1542685     1538676     1540356     1543588     1539028     1534623     1534876
+     1536008     1541887     1540712     1534964     1532732     1541235
+1neutron  activity in each cell                                                                         print table 126
+
+                       tracks     population   collisions   collisions     number        flux        average      average
+              cell    entering                               * weight     weighted     weighted   track weight   track mfp
+                                                          (per history)    energy       energy     (relative)      (cm)
+
+        1       10       13621        13559          602    1.4342E-05   1.3752E-03   6.3371E-01   9.8956E-01   1.4654E+00
+        2       11      151712       138217        77137    1.5861E-03   5.5075E-04   6.0016E-01   9.7586E-01   3.0731E+00
+        3       21     3539430      3150930           24    5.1768E-07   4.6492E-05   2.5316E-01   8.5085E-01   3.7571E+04
+        4       22    11617259      6779199       826023    1.7494E-02   4.6672E-05   2.5264E-01   8.4888E-01   3.9014E+00
+        5       23    16069740      6849852            3    4.3776E-08   4.7067E-05   2.5348E-01   8.4537E-01   3.7682E+04
+        6       24    22373901     10626946      3250546    6.7189E-02   4.6830E-05   2.5336E-01   8.4288E-01   3.1453E+00
+        7       25    52213267     39978011   1181380094    2.3679E+01   2.8499E-05   1.9613E-01   8.2438E-01   7.8606E-01
+
+           total     105978930     67536714   1185534429    2.3765E+01
+
+1tally        4        nps =    40000000
+           tally type 4    track length estimate of particle flux.                             
+           particle(s): neutrons 
+           this tally is modified by   ft  scx
+
+           volumes 
+                   cell:      10                                                                                   
+                         1.00000E-04
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.79620E-04 0.7336
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.17012E-04 0.4118
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.23260E-04 0.6071
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.32982E-04 0.4057
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 9.26926E-05 0.3944
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.63642E-04 0.6231
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.53029E-05 0.7493
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 8.56611E-05 0.3495
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 9.37258E-06 0.7045
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.89186E-05 0.7213
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 8.67603E-05 0.6402
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.06126E-04 0.3721
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 3.00057E-04 0.2306
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 5.02244E-04 0.1763
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 5.24767E-04 0.1292
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 9.53898E-04 0.1405
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.05602E-03 0.1007
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.40295E-03 0.0766
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.36512E-03 0.0845
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 8.87236E-03 0.1476
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.90714E-02 0.1080
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 6.96098E-03 0.1167
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 4.81087E-03 0.1076
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 4.93104E-03 0.1529
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.94602E-03 0.2426
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.22869E-03 0.3800
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.80085E-03 0.2264
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.21427E-03 0.2150
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.24441E-03 0.2300
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 3.06073E-03 0.2053
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.72597E-03 0.3057
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.49435E-03 0.2291
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.26740E-03 0.1864
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.95340E-03 0.1894
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.08362E-03 0.2822
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.36134E-03 0.3069
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 4.53203E-03 0.1589
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.30805E-03 0.2320
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.28567E-03 0.2791
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 8.91566E-04 0.3846
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 5.38887E-04 0.3760
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 4.19014E-04 0.2986
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 4.75863E-04 0.4530
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 6.11042E-04 0.3331
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 3.54724E-04 0.7273
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.14871E-04 0.3109
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.11926E-04 0.4311
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.19743E-04 0.4158
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.40218E-04 0.6413
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.36044E-04 0.6661
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 1.49683E-04 0.5115
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.03104E-04 0.9096
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.55055E-04 0.7484
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 3.48435E-06 0.2694
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 2.60123E-05 0.5368
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 6.73144E-07 0.2616
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 9.04586E-05 0.0883
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2         102                                                                                   
+                 9.12517E-02 0.0393
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2           4                                                                                   
+                 0.00000E+00 0.0000
+ 
+ cell  10                                                                                                                              
+ multiplier bin:  -1.00000E+00         2          16                                                                                   
+                 9.04586E-05 0.0883
+
+
+ ===================================================================================================================================
+
+           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally        4
+
+ tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-
+ behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope
+
+ desired      random       <0.10      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00
+ observed     random        0.04      yes          yes            0.01      yes         yes            constant    random      10.00
+ passed?        yes          yes      yes          yes             yes      yes         yes               yes        yes         yes
+
+ ===================================================================================================================================
+
+
+ this tally meets the statistical criteria used to form confidence intervals: check the tally fluctuation chart to verify.
+ the results in other bins associated with this tally may not meet these statistical criteria.
+
+ ----- estimated confidence intervals:  -----
+
+ estimated asymmetric confidence interval(1,2,3 sigma): 8.7813E-02 to 9.5002E-02; 8.4219E-02 to 9.8597E-02; 8.0624E-02 to 1.0219E-01
+ estimated  symmetric confidence interval(1,2,3 sigma): 8.7663E-02 to 9.4840E-02; 8.4075E-02 to 9.8428E-02; 8.0487E-02 to 1.0202E-01
+
+1analysis of the results in the tally fluctuation chart bin (tfc) for tally        4 with nps =    40000000  print table 160
+
+
+ normed average tally per history  = 9.12517E-02          unnormed average tally per history  = 9.12517E-06
+ estimated tally relative error    = 0.0393               estimated variance of the variance  = 0.0102
+ relative error from zero tallies  = 0.0086               relative error from nonzero scores  = 0.0384
+
+ number of nonzero history tallies =       13558          efficiency for the nonzero tallies  = 0.0003
+ history number of largest  tally  =    20963974          largest  unnormalized history tally = 2.84602E+00
+ (largest  tally)/(average tally)  = 3.11886E+05          (largest  tally)/(avg nonzero tally)= 1.05714E+02
+
+ (confidence interval shift)/mean  = 0.0017               shifted confidence interval center  = 9.14079E-02
+
+
+ if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:
+
+      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.
+
+      mean                            9.12517E-02             9.19632E-02                     0.007797
+      relative error                  3.93239E-02             3.97792E-02                     0.011581
+      variance of the variance        1.02390E-02             1.09100E-02                     0.065528
+      shifted center                  9.14079E-02             9.14155E-02                     0.000083
+      figure of merit                 1.04443E-01             1.02066E-01                    -0.022765
+
+ the estimated slope of the 200 largest  tallies starting at  4.03823E-01 appears to be decreasing at least exponentially.
+ the large score tail of the empirical history score probability density function appears to have no unsampled regions.
+
+ fom = (histories/minute)*(f(x) signal-to-noise ratio)**2 = (6.460E+03)*( 4.021E-03)**2 = (6.460E+03)*(1.617E-05) = 1.044E-01
+
+1status of the statistical checks used to form confidence intervals for the mean for each tally bin
+
+
+ tally   result of statistical checks for the tfc bin (the first check not passed is listed) and error magnitude check for all bins
+
+        4   passed the 10 statistical checks for the tally fluctuation chart bin result               
+         missed all bin error check:   171 tally bins had   112 bins with zeros and    54 bins with relative errors exceeding 0.10
+
+
+ the 10 statistical checks are only for the tally fluctuation chart bin and do not apply to other tally bins.
+
+ the tally bins with zeros may or may not be correct: compare the source, cutoffs, multipliers, et cetera with the tally bins.
+
+ warning.       1 of the     1 tallies had bins with relative errors greater than recommended.
+1tally fluctuation charts                              
+
+                            tally        4
+          nps      mean     error   vov  slope    fom
+      2048000   7.5863E-02 0.1933 0.1962  2.0 8.2E-02
+      4096000   9.1690E-02 0.1340 0.0795  2.4 8.4E-02
+      6144000   8.9060E-02 0.1059 0.0553  2.5 9.1E-02
+      8192000   8.9734E-02 0.0896 0.0395  2.9 9.6E-02
+     10240000   8.9816E-02 0.0793 0.0312  3.0 9.9E-02
+     12288000   8.9270E-02 0.0709 0.0256  3.3 1.0E-01
+     14336000   9.1319E-02 0.0649 0.0205  4.3 1.1E-01
+     16384000   9.1381E-02 0.0600 0.0187  4.5 1.1E-01
+     18432000   8.9543E-02 0.0565 0.0166  5.2 1.1E-01
+     20480000   8.7270E-02 0.0534 0.0153  6.8 1.1E-01
+     22528000   8.9081E-02 0.0534 0.0174  5.3 1.0E-01
+     24576000   8.9331E-02 0.0511 0.0158  6.6 1.0E-01
+     26624000   9.0804E-02 0.0483 0.0140 10.0 1.0E-01
+     28672000   8.9207E-02 0.0464 0.0132  9.8 1.0E-01
+     30720000   8.9316E-02 0.0454 0.0132  8.9 1.0E-01
+     32768000   8.9768E-02 0.0440 0.0122 10.0 1.0E-01
+     34816000   9.0002E-02 0.0423 0.0113 10.0 1.0E-01
+     36864000   9.1679E-02 0.0414 0.0112  9.0 1.0E-01
+     38912000   9.1295E-02 0.0400 0.0106 10.0 1.0E-01
+     40000000   9.1252E-02 0.0393 0.0102 10.0 1.0E-01
+
+ ***********************************************************************************************************************
+
+ dump no.    5 on file au_cd.inpr     nps =    40000000     coll =     1185534429     ctm =     6191.65   nrn =      
+ 20493057883
+
+         7 warning messages so far.
+
+
+ run terminated when    40000000  particle histories were done.
+
+ computer time = 6192.81 minutes
+
+ mcnp     version 6     05/08/13                     06/05/18 12:10:53                     probid =  06/05/18 12:01:42 

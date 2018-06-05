@@ -47,7 +47,7 @@ c                               Energy Bins
 c
 c
 c
-nps 1e6                                             $ Number of Particles
+nps 4e7                                             $ Number of Particles
 c
 c -----------------------------------------------------------------------------
 c ---------------------------- Tally Detectors --------------------------------
