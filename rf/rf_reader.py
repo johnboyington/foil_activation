@@ -19,8 +19,8 @@ def read_mcnp(readfile, writefiles, num_reactions):
             response[r, i] = float(val.split()[0])
             error[r, i] = float(val.split()[1])
     for name, r, e in zip(writefiles, response, error):
-        np.savetxt('data/' + name + '.txt', r)
-        np.savetxt('data/' + name + '_err.txt', e)
+        np.savetxt('data/' + name + '.txt', r[:-1])
+        np.savetxt('data/' + name + '_err.txt', e[:-1])
     return response
 
 # read all
