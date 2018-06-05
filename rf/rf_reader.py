@@ -1,12 +1,14 @@
 import numpy as np
 
 
-def read_mcnp(filename, num_reactions):
+def read_mcnp(readfile, writefiles, num_reactions):
     '''
     Reads an mcnp output file and parses out data from a single tally
     '''
 
-    with open(filename, 'r') as F:
+    assert len(writefiles) == num_reactions, 'Inconsistency in input.'
+
+    with open(readfile, 'r') as F:
         s = F.read()
 
     s = s.split('1tally')[1].split('===')[0].split('\n')[11:-3][::4]
@@ -16,8 +18,10 @@ def read_mcnp(filename, num_reactions):
         for i, val in enumerate(s[r::num_reactions]):
             response[r, i] = float(val.split()[0])
             error[r, i] = float(val.split()[1])
-    print(len(response[0]))
+    for name, r, e in zip(writefiles, response, error):
+        np.savetxt('data/' + name + '.txt', r)
+        np.savetxt('data/' + name + '_err.txt', e)
     return response
 
 if __name__ == '__main__':
-    read_mcnp('mcnp/in.inpo', 2)
+    read_mcnp('mcnp/in.io', ['in_n,gamma', 'in_n,inelastic'], 2)
