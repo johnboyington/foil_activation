@@ -12,12 +12,12 @@ def package_rfs(rf_indices):
     '''
     Given indices of various responses, prepares response matrix.
     '''
-    erg = np.loadtxt('scale56.txt')
+    erg = np.loadtxt('/home/john/workspace/foil_activation/rf/scale56.txt')
     rf_matrix = np.zeros((len(rf_indices), len(erg) - 1))
 
     for i, rf in enumerate(rf_indices):
         name = names[rf]
-        vals = np.loadtxt('data/' + name + '.txt')
+        vals = np.loadtxt('/home/john/workspace/foil_activation/rf/data/' + name + '.txt')
         rf_matrix[i] = vals
     return rf_matrix
 
