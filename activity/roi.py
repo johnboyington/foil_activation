@@ -127,19 +127,28 @@ def roi(sigma, phi, cd, cd_cov=False, recalculate=False):
     e = np.geomspace(region[0], region[1], 1000)
     xss = reaction_rate(e, phi, xs, cd)
 
-    roi_e = np.geomspace(left, right, 1000)
-    roi_xss = reaction_rate(roi_e, phi, xs, cd)
+    # roi_e = np.geomspace(left, right, 1000)
+    # roi_xss = reaction_rate(roi_e, phi, xs, cd)
 
     fig = plt.figure(0)
     ax = fig.add_subplot(111)
     ax.set_xlabel('Energy $eV$')
     ax.set_ylabel('Reaction Rate (Arbitrary Units)')
-    ax.plot(e, xss, color='black')
-    ax.fill_between(roi_e, roi_xss, facecolor='goldenrod')
     ax.set_xscale('log')
     ax.set_yscale('log')
+
+    ax.plot(e, xss, color='black', linewidth=0.5)
+
+    # roi stuff
+    text_top = max(reaction_rate(left, phi, xs, cd) * 2.5, reaction_rate(right, phi, xs, cd) * 2.5)
+    ax.plot([left, left], [text_top * 0.3, text_top * 1.0], color='black', linewidth=0.5)
+    ax.plot([right, right], [text_top * 0.3, text_top * 1.0], color='black', linewidth=0.5)
+    ax.text(left, text_top, '{:4.2e}'.format(left), fontsize=6)
+    ax.text(right, text_top, '{:4.2e}'.format(right), fontsize=6)
+    # ax.fill_between(roi_e, roi_xss, facecolor='goldenrod')
+
     ax.set_xlim(*region)
-    y_upper_lim = np.max(xss) * 2
+    y_upper_lim = np.max(xss) * 7
     if np.log(np.max(xss)) - np.log(np.min(xss)) > 28:
         ax.set_ylim(y_upper_lim * 1e-12, y_upper_lim)
     else:
@@ -158,8 +167,9 @@ if test:
 
 
 # run full simulation using each foil
+run_all = False
 # gold
-if False:
+if False or run_all:
     for xs in foils['Au']['reactions'].values():
         print('\n' + xs['plotname'])
         left, right = roi(xs, phi, no_cd, False, False)
@@ -167,7 +177,7 @@ if False:
         print('Right: {:6.4e}'.format(right))
 
 # indium
-if False:
+if False or run_all:
     for xs in foils['In']['reactions'].values():
         print('\n' + xs['plotname'])
         left, right = roi(xs, phi, no_cd, False, False)
@@ -175,7 +185,7 @@ if False:
         print('Right: {:6.4e}'.format(right))
 
 # rhodium
-if False:
+if False or run_all:
     for xs in foils['Rh']['reactions'].values():
         print('\n' + xs['plotname'])
         left, right = roi(xs, phi, no_cd, False, False)
@@ -183,7 +193,7 @@ if False:
         print('Right: {:6.4e}'.format(right))
 
 # aluminum
-if False:
+if False or run_all:
     for xs in foils['Al']['reactions'].values():
         print('\n' + xs['plotname'])
         left, right = roi(xs, phi, no_cd, False, False)
@@ -191,7 +201,7 @@ if False:
         print('Right: {:6.4e}'.format(right))
 
 # gold (Cd)
-if False:
+if False or run_all:
     for xs in foils['Au']['reactions'].values():
         print('\n' + xs['plotname'] + '  (Cd)')
         left, right = roi(xs, phi, ya_cd, True, False)
@@ -199,9 +209,17 @@ if False:
         print('Right: {:6.4e}'.format(right))
 
 # indium (Cd)
-if True:
+if False or run_all:
     for xs in foils['In']['reactions'].values():
         print('\n' + xs['plotname'] + '  (Cd)')
-        left, right = roi(xs, phi, ya_cd, True, True)
+        left, right = roi(xs, phi, ya_cd, True, False)
+        print('Left: {:6.4e}'.format(left))
+        print('Right: {:6.4e}'.format(right))
+
+# uranium
+if True or run_all:
+    for xs in foils['U']['reactions'].values():
+        print('\n' + xs['plotname'])
+        left, right = roi(xs, phi, no_cd, False, True)
         print('Left: {:6.4e}'.format(left))
         print('Right: {:6.4e}'.format(right))

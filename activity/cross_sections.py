@@ -191,9 +191,27 @@ Au['reactions']['n,inelastic']['label'] = r"($n,n'$)"
 Au['reactions']['n,inelastic']['erg'] = [(0.08, 130), (0.75, 279)]  # intensity, keV
 Au['reactions']['n,inelastic']['plotname'] = 'au_n,inelastic'
 
+# uranium
+U = {}
+U['M'] = 235.044  # g/mol
+U['rho'] = 19.1  # g/cm3
+U['reactions'] = {}
+
+U['reactions']['n,total_fission'] = {}
+f, r = extract('92-U-235(n,total_fission).txt')
+U['reactions']['n,total_fission']['func'] = f
+U['reactions']['n,total_fission']['region'] = r
+U['reactions']['n,total_fission']['roi'] = 2.5315e-03, 3.0442e-01  # unknown
+U['reactions']['n,total_fission']['roi_cd'] = -1, -1  # unknown
+U['reactions']['n,total_fission']['halflife'] = -1  # unknown
+U['reactions']['n,total_fission']['label'] = r'($n,fission$)'
+U['reactions']['n,total_fission']['erg'] = -1  # unknown
+U['reactions']['n,total_fission']['plotname'] = 'u_n,total_fission'
+
 # all foils
 foils = {}
 foils['Al'] = Al
 foils['Rh'] = Rh
 foils['In'] = In
 foils['Au'] = Au
+foils['U'] = U

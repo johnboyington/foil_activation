@@ -35,7 +35,7 @@ ax.set_ylim(1e-7, 1)
 
 for i, name in enumerate(names):
     # load in data
-    erg = np.loadtxt('scale56.txt')
+    erg = np.loadtxt('/home/john/workspace/foil_activation/rf/scale56.txt')
     vals = np.loadtxt('data/' + name + '.txt')
     err = np.loadtxt('data/' + name + '_err.txt')
 

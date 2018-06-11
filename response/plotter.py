@@ -7,7 +7,7 @@ import scipy.signal as signal
 #turns all .csv files in a particular folder into a list
 foillist = glob.glob("/home/john/workspace/foil_activation/response/data/*.csv")
 
-foillist = ['data/rh1.csv']
+foillist = ['data/al1.csv']
 #creates a loop to run each .csv independently
 for foil in foillist:
     values = foil
@@ -44,4 +44,5 @@ for foil in foillist:
     for i in peak_indices:
         peak_data.append((x[i], np.sum(y[i-20:i+20])))
     for d in peak_data:
-        print(d)
+        # print(d)
+        pass

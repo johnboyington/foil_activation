@@ -57,7 +57,7 @@ def write_mcnp(reaction, cadmium):
         cd_s = '13  -0.001662'
 
     # source term
-    erg = np.loadtxt('scale56.txt')
+    erg = np.loadtxt('/home/john/workspace/foil_activation/rf/scale56.txt')
     source_s = cardWriter('SI3  H      ', erg, 4)
     erg_ones = np.ones(len(erg))
     erg_ones[0] = 0
