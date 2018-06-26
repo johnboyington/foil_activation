@@ -140,12 +140,8 @@ def roi(sigma, phi, cd, cd_cov=False, recalculate=False):
     ax.plot(e, xss, color='black', linewidth=0.5)
 
     # roi stuff
-    text_top = max(reaction_rate(left, phi, xs, cd) * 2.5, reaction_rate(right, phi, xs, cd) * 2.5)
-    ax.plot([left, left], [text_top * 0.3, text_top * 1.0], color='black', linewidth=0.5)
-    ax.plot([right, right], [text_top * 0.3, text_top * 1.0], color='black', linewidth=0.5)
-    ax.text(left, text_top, '{:4.2e}'.format(left), fontsize=6)
-    ax.text(right, text_top, '{:4.2e}'.format(right), fontsize=6)
-    # ax.fill_between(roi_e, roi_xss, facecolor='goldenrod')
+    line_height = min(reaction_rate(left, phi, xs, cd) * 0.2, reaction_rate(right, phi, xs, cd) * 0.2)
+    ax.plot([left, right], [line_height, line_height], color='black', linewidth=0.8)
 
     ax.set_xlim(*region)
     y_upper_lim = np.max(xss) * 7
@@ -167,7 +163,7 @@ if test:
 
 
 # run full simulation using each foil
-run_all = False
+run_all = True
 # gold
 if False or run_all:
     for xs in foils['Au']['reactions'].values():
@@ -217,7 +213,7 @@ if False or run_all:
         print('Right: {:6.4e}'.format(right))
 
 # uranium
-if True or run_all:
+if False or run_all:
     for xs in foils['U']['reactions'].values():
         print('\n' + xs['plotname'])
         left, right = roi(xs, phi, no_cd, False, True)
